@@ -1,101 +1,109 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes as RouterRoutes, Route, Navigate } from "react-router-dom";
 import ScrollToTop from "components/ScrollToTop";
 import ErrorBoundary from "components/ErrorBoundary";
 import NotFound from "pages/NotFound";
-import LoyaltyPointsSystem from './pages/loyalty-points-system';
-import LoyaltyProgramEditPage from './pages/loyalty-points-system/LoyaltyProgramEditPage';
-import CatalogoRecompensasPage from './pages/loyalty-points-system/CatalogoRecompensasPage';
-import NuevaRecompensaPage from './pages/loyalty-points-system/NuevaRecompensaPage';
-import DashboardOverview from './pages/dashboard-overview';
-import Login from './pages/login';
-
-import CouponsManagement from './pages/coupons-management';
-import NuevoCuponPromocionPage from './pages/coupons-management/NuevoCuponPromocionPage';
-import NuevoCuponRecuperacionPage from './pages/coupons-management/NuevoCuponRecuperacionPage';
-import BusinessListingsManagement from './pages/business-listings-management';
-import RewardsManagement from './pages/rewards-management';
-import PromotionsManagement from './pages/promotions-management';
-import NewPromotionPage from './pages/promotions-management/NewPromotionPage';
-import EditPromotionPage from './pages/promotions-management/EditPromotionPage';
-import CampaignsManagement from './pages/campaigns-management';
-import NewCampaignPage from './pages/campaigns-management/NewCampaignPage';
-import CampaignDashboardPage from './pages/campaign-dashboard';
-import CampaignCreationPage from './pages/campaign-creation';
-import AudienceBuilder from './pages/audience-builder';
-import Register from './pages/register';
-import Profile from './pages/profile';
-
-import CatalogManagement from './pages/catalog-management';
-import ProductForm from './pages/catalog-management/product-form';
-import NotificationsPage from './pages/notifications';
-import NotificationSettings from './pages/notification-settings';
-
-import PointOfSale from './pages/point-of-sale';
-import StaffManagement from './pages/staff-management';
-import InventoryManagement from './pages/inventory-management';
-import BusinessSettings from './pages/business-settings';
-
-import AlertSettings from './pages/alert-settings';
-import EngagementAutomation from './pages/engagement-automation';
-import AutomationEffectivenessDashboard from './pages/automation-effectiveness-dashboard';
-import StaffConfirmation from './pages/staff-confirmation';
-import StaffOnboarding from './pages/staff-onboarding';
-import FirstTimeExperience from './pages/first-time-experience';
-import Billing from './pages/billing';
-import PlanesFacturacion from './pages/planes-facturacion';
-import SuppliersManagement from './pages/suppliers';
-import SupplierProfileDetail from './pages/supplier-profile-detail';
-import SupplierFullForm from './pages/suppliers/SupplierFullForm';
-import PurchaseOrders from './pages/purchase-orders';
-import InventoryTransfers from './pages/inventory-transfers';
-import GoodsReceipt from './pages/goods-receipt';
-import GoodsReceiptDetail from './pages/goods-receipt/components/GoodsReceiptDetail';
-import MarketingCalendar from './pages/marketing-calendar';
-import AutomationFlowsDashboard from './pages/automation-flows-dashboard';
-import LifecycleFlowsBuilder from './pages/lifecycle-flows-builder';
-import VisualFlowEditor from './pages/visual-flow-editor';
-import IFTTTRulesManagement from './pages/ifttt-rules-management';
-import FlowTestingInterface from './pages/flow-testing-interface';
-import IFTTTRuleBuilder from './pages/ifttt-rule-builder';
-import CRMClientsList from './pages/crm-clients-list';
-import CustomerProfileDetail from './pages/customer-profile-detail';
-import CRMSegmentsManagement from './pages/crm-segments-management';
-import CheckInModule from './pages/check-in-module';
-import CheckInConfigPage from './pages/check-in-module/CheckInConfigPage';
-import EstablishmentsPortfolio from './pages/establishments-portfolio';
-import CatalogSettings from './pages/catalog-settings';
-import BusinessListingWizard from './pages/business-listing-wizard';
-
-import FeaturedItemsAndUpsellManagement from './pages/featured-items-and-upsell-management';
-import ReviewsManagementDashboard from './pages/reviews-management-dashboard';
-import ReviewRequestsManagement from './pages/review-requests-management';
-import NPSManagement from './pages/nps-management';
-import SurveysManagement from './pages/surveys-management';
-import SurveysBenchmark from './pages/surveys-benchmark';
-
-import GeofencingModule from './pages/geofencing';
-
-import AnalyticsModule from './pages/analytics-and-reports';
-import KpiPorTipo from './pages/kpi-por-tipo';
-import VipLevelsManagement from './pages/vip-levels-management';
-import VIPLevelsWizardPage from './pages/vip-levels-management/VIPLevelsWizardPage';
-import SurprisesManagement from './pages/surprises-management';
-import NuevaSorpresaPage from './pages/surprises-management/NuevaSorpresaPage';
-import PunchCardsManagement from './pages/punch-cards-management';
-import NewPunchCardPage from './pages/punch-cards-management/NewPunchCardPage';
-import VisitStreaksManagement from './pages/visit-streaks-management';
-import VisitStreaksWizardPage from './pages/visit-streaks-management/VisitStreaksWizardPage';
-import AchievementsManagement from './pages/achievements-management';
-import AchievementsWizardPage from './pages/achievements-management/AchievementsWizardPage';
-import ManualValidations from './pages/manual-validations';
 import InactiveModule from './components/InactiveModule';
+
+const LoyaltyPointsSystem = lazy(() => import('./pages/loyalty-points-system'));
+const LoyaltyProgramEditPage = lazy(() => import('./pages/loyalty-points-system/LoyaltyProgramEditPage'));
+const CatalogoRecompensasPage = lazy(() => import('./pages/loyalty-points-system/CatalogoRecompensasPage'));
+const NuevaRecompensaPage = lazy(() => import('./pages/loyalty-points-system/NuevaRecompensaPage'));
+const DashboardOverview = lazy(() => import('./pages/dashboard-overview'));
+const Login = lazy(() => import('./pages/login'));
+
+const CouponsManagement = lazy(() => import('./pages/coupons-management'));
+const NuevoCuponPromocionPage = lazy(() => import('./pages/coupons-management/NuevoCuponPromocionPage'));
+const NuevoCuponRecuperacionPage = lazy(() => import('./pages/coupons-management/NuevoCuponRecuperacionPage'));
+const BusinessListingsManagement = lazy(() => import('./pages/business-listings-management'));
+const RewardsManagement = lazy(() => import('./pages/rewards-management'));
+const PromotionsManagement = lazy(() => import('./pages/promotions-management'));
+const NewPromotionPage = lazy(() => import('./pages/promotions-management/NewPromotionPage'));
+const EditPromotionPage = lazy(() => import('./pages/promotions-management/EditPromotionPage'));
+const CampaignsManagement = lazy(() => import('./pages/campaigns-management'));
+const NewCampaignPage = lazy(() => import('./pages/campaigns-management/NewCampaignPage'));
+const CampaignDashboardPage = lazy(() => import('./pages/campaign-dashboard'));
+const CampaignCreationPage = lazy(() => import('./pages/campaign-creation'));
+const AudienceBuilder = lazy(() => import('./pages/audience-builder'));
+const Register = lazy(() => import('./pages/register'));
+const Profile = lazy(() => import('./pages/profile'));
+
+const CatalogManagement = lazy(() => import('./pages/catalog-management'));
+const ProductForm = lazy(() => import('./pages/catalog-management/product-form'));
+const NotificationsPage = lazy(() => import('./pages/notifications'));
+const NotificationSettings = lazy(() => import('./pages/notification-settings'));
+
+const PointOfSale = lazy(() => import('./pages/point-of-sale'));
+const StaffManagement = lazy(() => import('./pages/staff-management'));
+const InventoryManagement = lazy(() => import('./pages/inventory-management'));
+const BusinessSettings = lazy(() => import('./pages/business-settings'));
+
+const AlertSettings = lazy(() => import('./pages/alert-settings'));
+const EngagementAutomation = lazy(() => import('./pages/engagement-automation'));
+const AutomationEffectivenessDashboard = lazy(() => import('./pages/automation-effectiveness-dashboard'));
+const StaffConfirmation = lazy(() => import('./pages/staff-confirmation'));
+const StaffOnboarding = lazy(() => import('./pages/staff-onboarding'));
+const FirstTimeExperience = lazy(() => import('./pages/first-time-experience'));
+const Billing = lazy(() => import('./pages/billing'));
+const PlanesFacturacion = lazy(() => import('./pages/planes-facturacion'));
+const SuppliersManagement = lazy(() => import('./pages/suppliers'));
+const SupplierProfileDetail = lazy(() => import('./pages/supplier-profile-detail'));
+const SupplierFullForm = lazy(() => import('./pages/suppliers/SupplierFullForm'));
+const PurchaseOrders = lazy(() => import('./pages/purchase-orders'));
+const InventoryTransfers = lazy(() => import('./pages/inventory-transfers'));
+const GoodsReceipt = lazy(() => import('./pages/goods-receipt'));
+const GoodsReceiptDetail = lazy(() => import('./pages/goods-receipt/components/GoodsReceiptDetail'));
+const MarketingCalendar = lazy(() => import('./pages/marketing-calendar'));
+const AutomationFlowsDashboard = lazy(() => import('./pages/automation-flows-dashboard'));
+const LifecycleFlowsBuilder = lazy(() => import('./pages/lifecycle-flows-builder'));
+const VisualFlowEditor = lazy(() => import('./pages/visual-flow-editor'));
+const IFTTTRulesManagement = lazy(() => import('./pages/ifttt-rules-management'));
+const FlowTestingInterface = lazy(() => import('./pages/flow-testing-interface'));
+const IFTTTRuleBuilder = lazy(() => import('./pages/ifttt-rule-builder'));
+const CRMClientsList = lazy(() => import('./pages/crm-clients-list'));
+const CustomerProfileDetail = lazy(() => import('./pages/customer-profile-detail'));
+const CRMSegmentsManagement = lazy(() => import('./pages/crm-segments-management'));
+const CheckInModule = lazy(() => import('./pages/check-in-module'));
+const CheckInConfigPage = lazy(() => import('./pages/check-in-module/CheckInConfigPage'));
+const EstablishmentsPortfolio = lazy(() => import('./pages/establishments-portfolio'));
+const CatalogSettings = lazy(() => import('./pages/catalog-settings'));
+const BusinessListingWizard = lazy(() => import('./pages/business-listing-wizard'));
+
+const FeaturedItemsAndUpsellManagement = lazy(() => import('./pages/featured-items-and-upsell-management'));
+const ReviewsManagementDashboard = lazy(() => import('./pages/reviews-management-dashboard'));
+const ReviewRequestsManagement = lazy(() => import('./pages/review-requests-management'));
+const NPSManagement = lazy(() => import('./pages/nps-management'));
+const SurveysManagement = lazy(() => import('./pages/surveys-management'));
+const SurveysBenchmark = lazy(() => import('./pages/surveys-benchmark'));
+
+const GeofencingModule = lazy(() => import('./pages/geofencing'));
+
+const AnalyticsModule = lazy(() => import('./pages/analytics-and-reports'));
+const KpiPorTipo = lazy(() => import('./pages/kpi-por-tipo'));
+const VipLevelsManagement = lazy(() => import('./pages/vip-levels-management'));
+const VIPLevelsWizardPage = lazy(() => import('./pages/vip-levels-management/VIPLevelsWizardPage'));
+const SurprisesManagement = lazy(() => import('./pages/surprises-management'));
+const NuevaSorpresaPage = lazy(() => import('./pages/surprises-management/NuevaSorpresaPage'));
+const PunchCardsManagement = lazy(() => import('./pages/punch-cards-management'));
+const NewPunchCardPage = lazy(() => import('./pages/punch-cards-management/NewPunchCardPage'));
+const VisitStreaksManagement = lazy(() => import('./pages/visit-streaks-management'));
+const VisitStreaksWizardPage = lazy(() => import('./pages/visit-streaks-management/VisitStreaksWizardPage'));
+const AchievementsManagement = lazy(() => import('./pages/achievements-management'));
+const AchievementsWizardPage = lazy(() => import('./pages/achievements-management/AchievementsWizardPage'));
+const ManualValidations = lazy(() => import('./pages/manual-validations'));
+
+const PageFallback = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="h-8 w-8 rounded-full border-2 border-gray-300 border-t-transparent animate-spin" />
+  </div>
+);
 
 const Routes = () => {
   return (
     <BrowserRouter>
       <ErrorBoundary>
       <ScrollToTop />
+      <Suspense fallback={<PageFallback />}>
       <RouterRoutes>
         {/* Define your route here */}
         <Route path="/" element={<DashboardOverview />} />
@@ -213,6 +221,7 @@ const Routes = () => {
         <Route path="/planes-facturacion" element={<PlanesFacturacion />} />
         <Route path="*" element={<NotFound />} />
       </RouterRoutes>
+      </Suspense>
       </ErrorBoundary>
     </BrowserRouter>
   );
